@@ -8,32 +8,45 @@ wind_directions = ['NORTH', 'SOUTH', 'EAST', 'WEST']
 
 class TileSet():
 
-    def __init__(self, NUM_TILE_COPIES:int):
+    def __init__(self):
         self.__tile_list = []
 
-        for i in range(NUM_TILE_COPIES):
-            #   add number tiles
-            self.__tile_list += list(itertools.product(vals, suits))
+        
 
-            #   add honors tiles
-            self.__tile_list += list(itertools.product(dragon_colors, ['dragon']))
-            self.__tile_list += list(itertools.product(wind_directions, ['wind']))
-
-            random.shuffle(self.__tile_list)
-
-
-    #   GETTERS
+# Getters
 
     @property
-    def tiles(self):
+    def tile_list(self):
         return self.__tile_list
 
+# Setters
 
-    #   SETTERS
-
-    @tiles.setter
-    def tiles(self, new_tiles: list):
+    @tile_list.setter
+    def tile_list(self, new_tiles: list):
         self.__tile_list = new_tiles
 
+# Class Methods
 
-    #   CLASS METHODS
+    @classmethod
+    def shuffleSelf(self):
+        new_tile_list : list = self.tile_list()
+        random.shuffle(new_tile_list)
+        self.tile_list(self,new_tile_list)
+
+    @classmethod
+    def generateNewTileSet(self, SET_RULES):
+        new_tile_list : list = []
+        num_copies : int = 4
+
+        for i in range(num_copies):
+            #   add number tiles
+            new_tile_list += list(itertools.product(vals, suits))
+
+            #   add honors tiles
+            new_tile_list += list(itertools.product(dragon_colors, ['dragon']))
+            new_tile_list += list(itertools.product(wind_directions, ['wind']))
+
+            random.shuffle(new_tile_list)
+        
+        self.tile_list(self, new_tile_list)
+        

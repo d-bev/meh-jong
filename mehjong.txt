@@ -1,5 +1,0 @@
-MVC Architecture?
-
-Now that I have most of the core classes implemented and working,
-     it's probably a good time to check architecture designs
-     and consider refactoring
