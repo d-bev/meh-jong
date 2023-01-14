@@ -1,18 +1,24 @@
 """
-    TODO: Classes to be implemented:
+    Classes to be implemented:
         Game
-            Scores
-                ScoreCalculator
-        Hand
         TileSet
-            Dead Wall
-                Dora
+            Tile
+        Dead Wall
         Player
+            Hand
 
-    Other possible classes:
+    Possible Class Variables:
 
-        various views
-        OtherPlayers
+        Game
+            round wind
+            who's dealer
+            players' scores
+            streak counter
+                
+        Dead Wall
+            Top Row
+            Bottom Row
+    
 """
 
 
