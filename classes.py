@@ -15,9 +15,11 @@
             players' scores
             streak counter
                 
-        Dead Wall
+        Dead Wall               (might want to make DeadWall a TileSet object that Game object oversees)
             Top Row
+                dora
             Bottom Row
+                ura-dora
     
 """
 

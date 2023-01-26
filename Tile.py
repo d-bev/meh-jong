@@ -1,27 +1,6 @@
-"""
-    Encoding for Tile suits:
 
-        0   ->  characters
-        1   ->  circles
-        2   ->  bamboo
-        3   ->  winds
-        4   ->  dragons
 
-    Encoding for Tile values:
-
-        1   ->  1
-        2   ->  2
-        ...
-        9   ->  9
-        10  ->  east wind
-        11  ->  south wind
-        12  ->  west wind
-        13  ->  north wind
-        14  ->  green dragon
-        15  ->  red dragon
-        16  ->  white dragon
-"""
-
+# Decoding of integer values to readable values
 DECODED_SUITS = ['chars', 'circles', 'bamboo', 'winds', 'dragons']
 DECODED_VALS = ['NULL', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'East', 'South', 'West', 'North', 'Green', 'Red', 'White']
 

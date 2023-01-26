@@ -1,16 +1,18 @@
 import Tile
 import random
 
+
 class TileSet():
 
     def __init__(self, num_copies : int, red_fives : bool):
         self.__num_tile_copies = num_copies
         self.__red_fives = red_fives
-        self.__tile_list = []
+        self.__tile_list : list = []
 
+        # There can't be Red Fives for Winds nor for Dragons
         excluded_suits = [3, 4]
 
-        # Create 'num_copies' worth of copies of each kind of tile
+        # Create 'num_copies' worth of copies for each kind of tile
         for i in range(num_copies):
 
             # For each suit, create tiles 1 through 9
@@ -51,7 +53,7 @@ class TileSet():
         for num, attr in enumerate(self.tile_list):
             string += f"{num}\t{repr(attr)}\n"
 
-        return string        
+        return string       
 
 # Getters
 

@@ -1,4 +1,5 @@
 import TileSet
+import Hand
 
 
 """
@@ -21,10 +22,13 @@ LOGIC:
        ???
 """
 
+
 NUM_TILE_COPIES = 4
 
-# Testing the creation of a standard tileset
-test_set_1 = TileSet.TileSet(NUM_TILE_COPIES, True)
 
+# Testing the creation of a standard tileset
+"""
+test_set_1 = TileSet.TileSet(NUM_TILE_COPIES, True)
 print(str(test_set_1))
 print(repr(test_set_1))
+"""

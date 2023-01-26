@@ -1,0 +1,14 @@
+
+What has been tested (and works as expected):
+
+    Tile.py
+    TileSet.py
+
+
+What has been tested (and doesn't work as expected):
+
+
+
+What hasn't yet been tested (WIP):
+
+    Hand.py
