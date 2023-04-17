@@ -1,7 +1,23 @@
-import TileSet
+import Dealer
 import Hand
+import Player
 
 
+
+NUM_COPIES = 4
+RED_FIVES = False
+
+
+
+bob = Dealer.Dealer(NUM_COPIES, RED_FIVES)
+
+print(bob.tilesLeft())
+
+ethan = Player.Player("ethan", bob.deal())
+
+print(bob.tilesLeft())
+
+print(ethan.hand.tiles)
 """
 ASSUMPTIONS:
 
@@ -20,15 +36,4 @@ LOGIC:
             has a Hand()
             a default amount of points (maybe not in Player())
        ???
-"""
-
-
-NUM_TILE_COPIES = 4
-
-
-# Testing the creation of a standard tileset
-"""
-test_set_1 = TileSet.TileSet(NUM_TILE_COPIES, True)
-print(str(test_set_1))
-print(repr(test_set_1))
 """

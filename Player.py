@@ -6,13 +6,14 @@ class Player():
         self.__hand = Hand(starting_tiles)
         self.__score = 0
 
-        # TODO:     might need a variable to store the '14th' tile in each player's hand:
-        #           the tile they draw at the start of the turn
-        #           the tile another player discards
-
+        # Handling the '14th' tile in each player's hand:
+        #   the tile they draw at the start of the turn
+        #   the tile another player discards
     
 
     #   GETTERS
+
+
     @property
     def name(self):
         return self.__name
@@ -27,6 +28,8 @@ class Player():
 
 
     #   SETTERS
+
+
     @name.setter
     def name(self, new_name:str):
         self.__name = new_name

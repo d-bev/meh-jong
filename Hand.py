@@ -2,12 +2,12 @@ import Tile
 
 class Hand():
 
+
     def __init__(self, starting_tiles: list):
-        self.__tiles : list = []
+        self.__tiles : list = starting_tiles
         self.__drawn_tile = None
         self.__called_tiles : list = []
 
-        self.tiles = starting_tiles
 
     # method to allow player to re-order the tiles in their respective hands
     def swap_tiles(self, index_1: int, index_2: int):
@@ -18,6 +18,7 @@ class Hand():
         current_hand[index_2] = temp
 
         self.tiles = current_hand        
+
 
     # method to allow a player to select a specific tile to discard at the end of the turn
     def discard(self, tile_to_discard: int):

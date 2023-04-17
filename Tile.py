@@ -1,5 +1,4 @@
 
-
 # Decoding of integer values to readable values
 DECODED_SUITS = ['chars', 'circles', 'bamboo', 'winds', 'dragons']
 DECODED_VALS = ['NULL', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'East', 'South', 'West', 'North', 'Green', 'Red', 'White']
@@ -20,7 +19,11 @@ class Tile():
         return f"{DECODED_VALS[self.value]}\tof {DECODED_SUITS[self.suit]}"
 
     def __repr__(self) -> str:
-        return f"Value: {DECODED_VALS[self.value]}\tSuit: {DECODED_SUITS[self.suit]}\tDora: {self.is_dora}  Ura-Dora: {self.is_ura_dora}  Red-Five: {self.is_red_five}"
+        return f"\nValue: {DECODED_VALS[self.value]}\n \
+                Suit: {DECODED_SUITS[self.suit]}\n \
+                Dora: {self.is_dora}\n \
+                Ura-Dora: {self.is_ura_dora}\n \
+                Red-Five: {self.is_red_five}\n"
 
 # Getters
     @property
