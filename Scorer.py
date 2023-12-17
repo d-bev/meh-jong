@@ -4,14 +4,14 @@ import Tile
 
 class Scorer():
 
-    def __init__(self, winner : list):
+    def __init__(self, hand : list):
         self.__full_flush : bool = False
         self.__half_flush : bool = False
         self.__half_outside : bool = False
         self.__full_outside : bool = False
         self.__num_triples : int = 0
         self.__num_quads : int = 0
-        self.__hand = winner
+        self.__winning_hand = hand
         self.__tile_dict = {}
 
         """
@@ -26,13 +26,14 @@ class Scorer():
         
         tiles = {}
 
-        for i in winner.tiles:
-            temp : Tile = winner.tiles.pop()
+        freq = {}
+        for i in range(len(hand)):
+            item : Tile = hand[i]
 
-            if temp in tiles:
-                tiles[temp] += 1
+            if (item.id in freq):
+                freq[item.id] += 1
             else:
-                tiles[temp] = 1
+                freq[item.id] = 1
 
         self.tile_dict = tiles
 
@@ -71,8 +72,8 @@ class Scorer():
         return self.__num_quads
     
     @property
-    def hand(self):
-        return self.__hand
+    def winning_hand(self):
+        return self.__winning_hand
     
     @property
     def tile_dict(self):
@@ -100,21 +101,21 @@ class Scorer():
 
     @num_triples.setter
     def num_triples(self, i : int):
-        if (0 <= i and i <= 4):
+        if (0 <= i and i < 4):
             self.__num_triples = i
         else:
             ValueError(self)
 
     @num_quads.setter
     def num_quads(self, i : int):
-        if (0 <= i and i <= 3):
+        if (0 <= i and i < 3):
             self.__num_quads = i
         else:
             ValueError(self)
 
-    @hand.setter
+    @winning_hand.setter
     def hand(self, hand : list):
-        self.__hand = hand
+        self.__winning_hand = hand
 
     @tile_dict.setter
     def tile_dict(self, tiles : dict):

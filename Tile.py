@@ -3,8 +3,9 @@
 
 class Tile():
 
-    def __init__(self, id: int):
+    def __init__(self, id: int, red: bool):
         self.__id = id
+        self.__is_red = red
 
     def __str__(self):
         s : str
@@ -19,7 +20,10 @@ class Tile():
             case 3:
                 s = "4 of characters"
             case 4:
-                s = "5 of characters"
+                if self.is_red:
+                    s = "5 of characters (red)"
+                else:
+                    s = "5 of characters"
             case 5:
                 s = "6 of characters"
             case 6: 
@@ -37,7 +41,10 @@ class Tile():
             case 12:
                 s = "4 of circles"
             case 13:
-                s = "5 of circles"
+                if self.is_red:
+                    s = "5 of circles (red)"
+                else:
+                    s = "5 of circles"
             case 14:
                 s = "6 of circles"
             case 15: 
@@ -55,7 +62,10 @@ class Tile():
             case 21:
                 s = "4 of bamboo"
             case 22:
-                s = "5 of bamboo"
+                if self.is_red:
+                    s = "5 of bamboo (red)"
+                else:
+                    s = "5 of bamboo"
             case 23:
                 s = "6 of bamboo"
             case 24: 
@@ -78,20 +88,13 @@ class Tile():
                 s = "red dragon"
             case 33:
                 s = "white dragon"
-            case 34:
-                s = "red 5 of characters"
-            case 35:
-                s = "red 5 of circles"
-            case 36: 
-                s = "red 5 of bamboo"
         return s
         
     @property
     def id(self):
         return self.__id
     
-    @id.setter
-    def id(self, id2 : int):
-        self.__id = id2
-        
+    @property
+    def is_red(self):
+        return self.__is_red
     

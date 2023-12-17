@@ -10,11 +10,7 @@ class DiscardPile():
         self.__discards : list = []
 
 
-    # Testing
-
-
-    def validate_dimensions(self):
-        pass
+    
 
 
     # Getters
@@ -24,11 +20,10 @@ class DiscardPile():
     def discards(self):
         return self.__discards
 
+
     # Setters
 
 
     @discards.setter
     def discards(self, new_discard):
-        
-        # validate_dimensions()
         self.discards.append(new_discard)
