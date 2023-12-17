@@ -1,61 +1,97 @@
 
-# Decoding of integer values to readable values
-DECODED_SUITS = ['chars', 'circles', 'bamboo', 'winds', 'dragons']
-DECODED_VALS = ['NULL', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'East', 'South', 'West', 'North', 'Green', 'Red', 'White']
+
 
 class Tile():
 
-    def __init__(self, suit: int, value: int):
-        # Attributes a Tile MUST have
-        self.__suit = suit
-        self.__value = value
-
-        # Attributes a Tile MIGHT have
-        self.__is_dora = False
-        self.__is_ura_dora = False
-        self.__is_red_five = False
+    def __init__(self, id: int):
+        self.__id = id
 
     def __str__(self):
-        return f"{DECODED_VALS[self.value]}\tof {DECODED_SUITS[self.suit]}"
+        s : str
 
-    def __repr__(self) -> str:
-        return f"\nValue: {DECODED_VALS[self.value]}\n \
-                Suit: {DECODED_SUITS[self.suit]}\n \
-                Dora: {self.is_dora}\n \
-                Ura-Dora: {self.is_ura_dora}\n \
-                Red-Five: {self.is_red_five}\n"
-
-# Getters
+        match self.id:
+            case 0:
+                s = "1 of characters"
+            case 1:
+                s = "2 of characters"
+            case 2:
+                s = "3 of characters"
+            case 3:
+                s = "4 of characters"
+            case 4:
+                s = "5 of characters"
+            case 5:
+                s = "6 of characters"
+            case 6: 
+                s = "7 of characters"
+            case 7: 
+                s = "8 of characters"
+            case 8:
+                s = "9 of characters"
+            case 9:
+                s = "1 of circles"
+            case 10:
+                s = "2 of circles"
+            case 11:
+                s = "3 of circles"
+            case 12:
+                s = "4 of circles"
+            case 13:
+                s = "5 of circles"
+            case 14:
+                s = "6 of circles"
+            case 15: 
+                s = "7 of circles"
+            case 16: 
+                s = "8 of circles"
+            case 17:
+                s = "9 of circles"
+            case 18:
+                s = "1 of bamboo"
+            case 19:
+                s = "2 of bamboo"
+            case 20:
+                s = "3 of bamboo"
+            case 21:
+                s = "4 of bamboo"
+            case 22:
+                s = "5 of bamboo"
+            case 23:
+                s = "6 of bamboo"
+            case 24: 
+                s = "7 of bamboo"
+            case 25: 
+                s = "8 of bamboo"
+            case 26:
+                s = "9 of bamboo"
+            case 27:
+                s = "east wind"
+            case 28:
+                s = "south wind"
+            case 29:
+                s = "west wind"
+            case 30:
+                s = "north wind"
+            case 31:
+                s = "green dragon"
+            case 32:
+                s = "red dragon"
+            case 33:
+                s = "white dragon"
+            case 34:
+                s = "red 5 of characters"
+            case 35:
+                s = "red 5 of circles"
+            case 36: 
+                s = "red 5 of bamboo"
+        return s
+        
     @property
-    def suit(self):
-        return self.__suit
-
-    @property
-    def value(self):
-        return self.__value
-
-    @property
-    def is_dora(self):
-        return self.__is_dora
-
-    @property
-    def is_ura_dora(self):
-        return self.__is_ura_dora
-
-    @property
-    def is_red_five(self):
-        return self.__is_red_five
-
-# Setters
-
-    @is_dora.setter
-    def is_dora(self, boolean: bool):
-        self.__is_dora = boolean
-
-    @is_ura_dora.setter
-    def is_ura_dora(self, boolean: bool):
-        self.__is_ura_dora = boolean
-
-    @is_red_five.setter
-    def is_red_five(self, boolean: bool):
-        self.__is_red_five = boolean
+    def id(self):
+        return self.__id
+    
+    @id.setter
+    def id(self, id2 : int):
+        self.__id = id2
+        
+    

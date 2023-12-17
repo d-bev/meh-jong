@@ -1,7 +1,7 @@
 import Dealer
-import Hand
 import Player
-
+import Scorer
+import Tile
 
 
 NUM_COPIES = 4
@@ -9,15 +9,9 @@ RED_FIVES = False
 
 
 
-bob = Dealer.Dealer(NUM_COPIES, RED_FIVES)
 
-print(bob.tilesLeft())
 
-ethan = Player.Player("ethan", bob.deal())
 
-print(bob.tilesLeft())
-
-print(ethan.hand.tiles)
 """
 ASSUMPTIONS:
 

@@ -1,5 +1,4 @@
 import Tile
-import Hand
 import random
 
 
@@ -9,64 +8,47 @@ class Dealer():
     #   for {num_copies} players and {with/without} Red Fives
     
     def __init__(self, num_copies : int, red_fives : bool):
-        self.__num_tile_copies = num_copies
-        self.__red_fives = red_fives
         self.__tile_list : list = []
 
-        # There can't be Red Fives for Winds nor Dragons
-        excluded_suits = [3, 4]
-
-        # Create 'num_copies' worth of copies for each kind of tile
+        
         for i in range(num_copies):
+            for i in range(33):
+                self.__tile_list.append(Tile.Tile(i))
 
-            # For each suit, create tiles 1 through 9
-            for suit in range(3):
-                for val in range(1, 10):
-                    new_tile = Tile.Tile(suit, val)
+        if red_fives:
+            # remove a 5 from each suit
+            self.tile_list.remove(4)
+            self.tile_list.remove(13)
+            self.tile_list.remove(22)
 
-                    if red_fives and (val == 5) and (suit not in excluded_suits):
-                        new_tile.is_red_five = True
-                        excluded_suits.append(suit)
-                    
-                    self.__tile_list.append( new_tile )
-
-            # Add a copy of each wind
-            self.__tile_list.append( Tile.Tile(3, 10) )   # Tile.__init__
-            self.__tile_list.append( Tile.Tile(3, 11) )
-            self.__tile_list.append( Tile.Tile(3, 12) )
-            self.__tile_list.append( Tile.Tile(3, 13) )
-
-            # Add a copy of each dragon
-            self.__tile_list.append( Tile.Tile(4, 14) )
-            self.__tile_list.append( Tile.Tile(4, 15) )
-            self.__tile_list.append( Tile.Tile(4, 16) )
+            # add a red 5 to each suit
+            self.tile_list.append(34)
+            self.tile_list.append(35)
+            self.tile_list.append(36)
 
         # Shuffle the tiles after
         random.shuffle(self.__tile_list)   
 
+    
+    # GETTERS
+        
 
-    def __str__(self):
-        string : str = ""
-        for num, attr in enumerate(self.__tile_list):
-            string += f"{num}\t{str(attr)}\n"
-
-        return string
-
-
-    def __repr__(self) -> str:
-        string : str = ""
-        for num, attr in enumerate(self.__tile_list):
-            string += f"{num}\t{repr(attr)}\n"
-
-        return string   
+    @property
+    def tile_list(self):
+        return self.__tile_list
+    
+    
+    # SETTERS
 
 
-    """
-        CORE FUNCTIONS
-    """    
+    @tile_list.setter
+    def tile_list(self, l : list):
+        self.__tile_list = l
+
+    
+    # FUNCTIONS
 
 
-    # pass tiles from the dealer's tileset to a player (for the player to then put in heir hand)
     def deal(self):
         newTiles : list = []
         
@@ -76,10 +58,5 @@ class Dealer():
         return newTiles
 
 
-    """
-        HELPER FUNCTIONS
-    """
-
-
-    def tilesLeft(self):
+    def remaining(self):
         return len(self.__tile_list)
