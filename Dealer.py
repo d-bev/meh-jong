@@ -10,6 +10,8 @@ class Dealer():
     def __init__(self, num_copies : int, red_fives : bool):
         self.__tile_list : list = []
         self.__red_fives = red_fives
+
+        #TODO: Implement 
         
         if red_fives:
             # skip the indeces of all '5' tiles

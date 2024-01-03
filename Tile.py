@@ -1,6 +1,5 @@
 
 
-
 class Tile():
 
     def __init__(self, id: int, red: bool):
