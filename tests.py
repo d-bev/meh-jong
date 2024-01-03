@@ -50,11 +50,11 @@ def player_tests():
     # ensure that a player can discard
 
     # purposefully creating a hand that doesn't have a duplicate (breaks testing logic)
-    tile_list = [Tile.Tile(), Tile.Tile(), Tile.Tile() /
-                 Tile.Tile(), Tile.Tile(), Tile.Tile() /
-                 Tile.Tile(), Tile.Tile(), Tile.Tile() /
-                 Tile.Tile(), Tile.Tile(), Tile.Tile() /
-                 Tile.Tile()]
+    tile_list = [Tile.Tile(1, False), Tile.Tile(17, False), Tile.Tile(19, False), 
+                 Tile.Tile(3, False), Tile.Tile(24, False), Tile.Tile(30, False), 
+                 Tile.Tile(5, False), Tile.Tile(18, False), Tile.Tile(6, False), 
+                 Tile.Tile(22, False), Tile.Tile(28, False), Tile.Tile(8, False),
+                 Tile.Tile(10, False)]
     
     bob = Player.Player("bob", tile_list)
     before_size = len(bob.hand)
@@ -64,7 +64,7 @@ def player_tests():
     after_size = len(bob.hand)
     after_tile = bob.hand[3]
 
-    if before_size != after_size and (before_tile != after_tile):
+    if before_size != after_size and (before_tile.id != after_tile.id):
         print("\tdiscard at index:\tGOOD")
     else:
         print("\tdiscard at index:\tFAIL")
@@ -79,7 +79,7 @@ def player_tests():
 def dealer_tests():
     print("*** DEALER TESTS: START ***")
     # ensure 136 tiles for 4 players
-    dealer = Dealer.Dealer(NUM_COPIES=4, RED_FIVES=True)
+    dealer = Dealer.Dealer(4, True)
     if(len(dealer.deal_player()) == 136):
         print("\tTile count:\tGOOD")
     else:
