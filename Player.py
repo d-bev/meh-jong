@@ -6,16 +6,19 @@ class Player():
         self.__hand : list = starting_tiles
         self.__score : int = 0
 
+        self.__called_tiles : list = []
+        # TODO: self.__discard_pile = DiscardPile.DiscardPile(player_name, ?)
+
         # Handling the '14th' tile in each player's hand:
         #   the tile a player draws at the start of their turn
-        #   the tile another player discards
+        #   the tile another player discards (chii/pon/kan/ron)
 
         self.__drawn_tile = None
-        self.__called_tiles : list = []
         self.__winning_tiles : list = []
 
         self.sort_tiles()
         
+
     #   GETTERS
         
 
@@ -62,7 +65,7 @@ class Player():
     @called_tiles.setter
     def add_tile(self, new_tiles : list):
 
-        # FIXME: not sure if this is correct method to append a small group of tiles, as you would have to append either:
+        # FIXME: Can you append a list to a list? You would have to append either:
         #       Chi / Pon   : two tiles from player's hand and 1 other player's discarded tile
         #       Kan         : three tiles from player's hand and 1 other player's discarded tile
         #       Natural Kan : all four tiles from player's hand
@@ -119,37 +122,50 @@ class Player():
     #   Create an equivalent tile set, but sorted first by suit, and then by value
     def sort_tiles(self):
         hand = []
-        
         red_character = False
         red_circle = False
         red_bamboo = False
-        
+
+        # take the 'id' param from each Tile and sort that list instead of attempting to sort the objects
+
         for i in range(len(self.hand)):
             tile = self.hand[i]
-            if tile.id in [4, 13, 22] and tile.is_red == True:
-                match tile.id:
-                    case 4:
-                        red_character = True
-                    case 13:
-                        red_circle = True
-                    case 22:
-                        red_bamboo = True
             hand.append(tile.id)
 
         hand = sorted(hand)
 
-        for i in range(len(hand)):
-            if hand[i] == 4 and red_character:
-                red_character = False
-                self.hand[i] = Tile.Tile(hand[i], True)
-            elif hand[i] == 13 and red_circle:
-                red_circle = False
-                self.hand[i] = Tile.Tile(hand[i], True)
-            elif hand[i] == 22 and red_bamboo:
-                red_bamboo = False
-                self.hand[i] = Tile.Tile(hand[i], True)
-            else:
-                self.hand[i] = Tile.Tile(hand[i], False)
+        """
+            Now, because red fives have the highest integer value, we need to parse the list we've 
+                created and determine where the red fives should be placed (as if they were normal fives)
+
+            I'm going to parse the 'hand' list I just created and set a flag if there's a red five (of each kind)
+
+            When re-constructing 
+        """
+
+        for i in hand:
+            if hand[i] == 34:
+                red_character = True
+            if hand[i] == 35:
+                red_circle = True
+            if hand[i] == 36:
+                red_bamboo = True
+
+        # re-create the list
+
+        if red_bamboo or red_character or red_circle:
+            for i in hand:
+                if (hand[i]) and ():
+                    pass
+                if (hand[i]) and ():
+                    pass
+                if (hand[i]) and ():
+                    pass
+        else:
+            for i in range(len(hand)):
+                self.hand[i] = Tile.Tile(hand[i])
+
+        
 
         return self.hand
 

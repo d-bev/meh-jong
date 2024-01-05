@@ -8,15 +8,14 @@ import Scorer
 
 
 def tile_tests():
-    red_char_five = Tile.Tile(4, True)
-    char_five = Tile.Tile(4, False)
-    circ_three = Tile.Tile(11, False)
-    east_wind = Tile.Tile(27, False)
-    red_dragon = Tile.Tile(32, False)
+    red_char_five = Tile.Tile(4)
+    char_five = Tile.Tile(4)
+    circ_three = Tile.Tile(11)
+    east_wind = Tile.Tile(27)
+    red_dragon = Tile.Tile(32)
 
     print("*** TILE TESTS: START ***")
     
-    print("  String Matching Tests")
     if str(red_char_five) == "5 of characters (red)":
         print("\tred_char_five:\tGOOD")
     else:
@@ -47,16 +46,15 @@ def tile_tests():
 def player_tests():
     print("*** PLAYER TESTS: START ***")
 
-    # ensure that a player can discard
+    # ensure that a player can discard (need a hand without duplicates; would break "id != id")
 
-    # purposefully creating a hand that doesn't have a duplicate (breaks testing logic)
-    tile_list = [Tile.Tile(1, False), Tile.Tile(17, False), Tile.Tile(19, False), 
-                 Tile.Tile(3, False), Tile.Tile(24, False), Tile.Tile(30, False), 
-                 Tile.Tile(5, False), Tile.Tile(18, False), Tile.Tile(6, False), 
-                 Tile.Tile(22, False), Tile.Tile(28, False), Tile.Tile(8, False),
-                 Tile.Tile(10, False)]
+    tile_list = [Tile.Tile(1), Tile.Tile(17), Tile.Tile(19), 
+                 Tile.Tile(3), Tile.Tile(24), Tile.Tile(30), 
+                 Tile.Tile(5), Tile.Tile(18), Tile.Tile(6), 
+                 Tile.Tile(22), Tile.Tile(28), Tile.Tile(8),
+                 Tile.Tile(10)]
     
-    bob = Player.Player("bob", tile_list)
+    bob = Player.Player("bob", tile_list) 
     before_size = len(bob.hand)
     before_tile : Tile = bob.hand[3]
 
@@ -64,13 +62,37 @@ def player_tests():
     after_size = len(bob.hand)
     after_tile = bob.hand[3]
 
-    if before_size != after_size and (before_tile.id != after_tile.id):
-        print("\tdiscard at index:\tGOOD")
+    if (before_size - 1 == after_size) and (before_tile.id != after_tile.id):
+        print("\tdiscard test:\tGOOD")
     else:
-        print("\tdiscard at index:\tFAIL")
+        print("\tdiscard test:\tFAIL")
 
-    # ensure that a player can swap the position of two tiles in their hand
-        
+
+    # TODO: ensure that a player can swap the position of two tiles in their hand
+
+
+
+    # ensure that hand-sorting works 
+
+    dealer = Dealer.Dealer(4)
+    hand = dealer.deal_player()
+    bob = Player.Player("bob", hand) # when a player is instantiated, their hand will be sorted
+
+    test_passed = True
+    first_tile : Tile = bob.hand[0]
+
+    for i in range(len(bob.hand)):
+        # the first tile in the player's hand should have the smallest id
+        if bob.hand[i].id < first_tile.id:
+            test_passed = False
+
+    if test_passed:
+        print("\tsorting test:\tGOOD")
+    else:
+        print("\tsorting test:\tFAIL")
+
+
+
 
 
 
@@ -79,11 +101,39 @@ def player_tests():
 def dealer_tests():
     print("*** DEALER TESTS: START ***")
     # ensure 136 tiles for 4 players
-    dealer = Dealer.Dealer(4, True)
-    if(len(dealer.deal_player()) == 136):
+    dealer = Dealer.Dealer(4)
+
+    print(len(dealer.tile_list))
+
+    if len(dealer.tile_list) == 136:
         print("\tTile count:\tGOOD")
     else:
         print("\tTile count:\tFAIL")
+
+    # ensure dealer has correct number pf each kind of tile
+    dealer = Dealer.Dealer(4)
+    if dealer.validate_tileset():
+        print("")
+    else:
+        print("")
+
+    dealer = Dealer.Dealer(3)
+    if dealer.validate_tileset():
+        print("")
+    else:
+        print("")
+
+    dealer = Dealer.Dealer(4)
+    if dealer.validate_tileset():
+        print("")
+    else:
+        print("")
+
+    dealer = Dealer.Dealer(3)
+    if dealer.validate_tileset():
+        print("")
+    else:
+        print("")
     
     # ensure dealer can give a player a hand (and tiles are correctly removed)
         
@@ -117,7 +167,7 @@ print("4 - Scorer Tests")
 # ...
 print("9 - Run all tests")
 
-selection : int = input()
+selection = int(input())
 
 match selection:
     case 1:
