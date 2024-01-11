@@ -101,7 +101,7 @@ def player_tests():
 def dealer_tests():
     print("*** DEALER TESTS: START ***")
     # ensure 136 tiles for 4 players
-    dealer = Dealer.Dealer(4)
+    dealer = Dealer.Dealer(4, False)
 
     print(len(dealer.tile_list))
 
@@ -110,26 +110,26 @@ def dealer_tests():
     else:
         print("\tTile count:\tFAIL")
 
-    # ensure dealer has correct number pf each kind of tile
-    dealer = Dealer.Dealer(4)
+    # ensure dealer has correct number of each kind of tile
+    dealer = Dealer.Dealer(4, False)
     if dealer.validate_tileset():
         print("")
     else:
         print("")
 
-    dealer = Dealer.Dealer(3)
+    dealer = Dealer.Dealer(3, False)
     if dealer.validate_tileset():
         print("")
     else:
         print("")
 
-    dealer = Dealer.Dealer(4)
+    dealer = Dealer.Dealer(4, True)
     if dealer.validate_tileset():
         print("")
     else:
         print("")
 
-    dealer = Dealer.Dealer(3)
+    dealer = Dealer.Dealer(3, True)
     if dealer.validate_tileset():
         print("")
     else:

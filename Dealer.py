@@ -1,6 +1,7 @@
 import Tile
 import random
 
+DEBUG = False
 
 class Dealer():
 
@@ -94,6 +95,7 @@ class Dealer():
 
     def validate_tileset(self):
         is_valid = True
+        red_fives = self.red_fives
         expected_value = self.num_copies
         error : str = "\n"
 
@@ -108,30 +110,30 @@ class Dealer():
             else:
                 freq[item.id] = 1
 
-
-        for key, value in freq.items():
-            print(key.id)
-
-
-        if self.red_fives:
+        if DEBUG:
+            print(f"\ncount: {expected_value}, red: {red_fives}\n")
             for key, value in freq.items():
-                if value in [4, 13, 22]: # if tile is a non-red five, should only be (expected - 1)
+                print(Tile.Tile(key))
+
+        if red_fives:
+            for key, value in freq.items():
+                if key in [4, 13, 22]: # if tile is a non-red five, should only be (expected_value - 1)
                     if value != (expected_value - 1):
                         is_valid = False
-                        error += f"counted (%d) copies of Tile #%d, but expected %d\n\n" % (value, key, (expected_value - 1))
-                elif value in [34, 35, 36]: # if tile is a red five, should only be 1
+                        error += f"counted (%d) copies of Tile #%d, but expected %d\n" % (value, key, (expected_value - 1))
+                elif key in [34, 35, 36]: # if tile is a red five, should only be 1
                     if value != 1:
                         is_valid = False
-                        error += f"counted (%d) copies of Tile #%d, but expected 1\n\n" % (value, key)
+                        error += f"counted (%d) copies of Tile #%d, but expected 1\n" % (value, key)
                 else:
-                    if value != expected_value:
+                    if value != expected_value: # if tile isn't a five, should only be expected_value
                         is_valid = False
-                        error += f"counted (%d) copies of Tile #%d, but expected %d\n\n" % (value, key, expected_value)
+                        error += f"counted (%d) copies of Tile #%d, but expected %d\n" % (value, key, expected_value)
         else:
             for key, value in freq.items():
                 if value != expected_value:
                     is_valid = False
-                    error += f"counted (%d) copies of Tile #%d, but expected %d\n\n" % (value, key, expected_value)
+                    error += f"counted (%d) copies of Tile #%d, but expected %d\n" % (value, key, expected_value)
     
         if is_valid == False:
             print(error)
