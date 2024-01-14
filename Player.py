@@ -1,6 +1,6 @@
 import Tile
 
-DEBUG = True
+DEBUG = False
 
 class Player():
     def __init__(self, name:str, starting_tiles:list):
@@ -67,7 +67,7 @@ class Player():
     @called_tiles.setter
     def add_tile(self, new_tiles : list):
 
-        # FIXME: Can you append a list to a list? You would have to append either:
+        # TODO:
         #       Chi / Pon   : two tiles from player's hand and 1 other player's discarded tile
         #       Kan         : three tiles from player's hand and 1 other player's discarded tile
         #       Natural Kan : all four tiles from player's hand
@@ -93,7 +93,7 @@ class Player():
         self.hand[index_2] = temp
 
 
-    # method to allow a player to select a specific tile to discard at the end of the turn
+    # TODO: method to allow a player to select a specific tile to discard at the end of the turn
     def discard(self, tile_to_discard: int):
         # get metadata of selected Tile
         discard_copy = self.hand[tile_to_discard]
@@ -109,7 +109,7 @@ class Player():
         return discard_copy
 
 
-    # method to (if a player runs out of time on their turn) force them to discard their newly-drawn tile
+    # TODO: method to (if a player runs out of time on their turn) force them to discard their newly-drawn tile
     def force_discard(self):
         # store drawn tile
         draw = self.__drawn_tile

@@ -8,43 +8,43 @@ import Scorer
 
 
 def tile_tests():
-    red_char_five = Tile.Tile(4)
+    red_char_five = Tile.Tile(34)
     char_five = Tile.Tile(4)
     circ_three = Tile.Tile(11)
     east_wind = Tile.Tile(27)
     red_dragon = Tile.Tile(32)
 
-    print("*** TILE TESTS: START ***")
+    print("***\tTILE TESTS:\tSTART\t***")
     
     if str(red_char_five) == "5 of characters (red)":
-        print("\tred_char_five:\tGOOD")
+        print("\tred_char_five:\t\tGOOD")
     else:
-        print("\tred_char_five:\tFAIL")
+        print("\tred_char_five:\t\tFAIL")
 
     if str(char_five) == "5 of characters":
-        print("\tchar_five:\tGOOD")
+        print("\tchar_five:\t\tGOOD")
     else:
-        print("\tchar_five:\tFAIL")
+        print("\tchar_five:\t\tFAIL")
 
     if str(circ_three) == "3 of circles":
-        print("\tcirc_three:\tGOOD")
+        print("\tcirc_three:\t\tGOOD")
     else:
-        print("\tcirc_three:\tFAIL")
+        print("\tcirc_three:\t\tFAIL")
 
     if str(east_wind) == "east wind":
-         print("\teast_wind:\tGOOD")
+         print("\teast_wind:\t\tGOOD")
     else:
-         print("\teast_wind:\tFAIL")
+         print("\teast_wind:\t\tFAIL")
 
     if str(red_dragon) == "red dragon":
-        print("\tred_dragon:\tGOOD")
+        print("\tred_dragon:\t\tGOOD")
     else:
-        print("\tred_dragon:\tFAIL")
+        print("\tred_dragon:\t\tFAIL")
     
-    print("*** TILE TESTS: DONE ***")
+    print("***\tTILE TESTS:\tDONE\t***")
 
 def player_tests():
-    print("*** PLAYER TESTS: START ***")
+    print("***\tPLAYER TESTS:\tSTART\t***")
 
     # ensure that a player can discard (need a hand without duplicates; would break "id != id")
 
@@ -53,6 +53,8 @@ def player_tests():
                  Tile.Tile(5), Tile.Tile(18), Tile.Tile(6), 
                  Tile.Tile(22), Tile.Tile(28), Tile.Tile(8),
                  Tile.Tile(10)]
+    
+    list_copy = tile_list
     
     bob = Player.Player("bob", tile_list) 
     before_size = len(bob.hand)
@@ -63,20 +65,37 @@ def player_tests():
     after_tile = bob.hand[3]
 
     if (before_size - 1 == after_size) and (before_tile.id != after_tile.id):
-        print("\tdiscard test:\tGOOD")
+        print("\tdiscard index 3:\tGOOD")
     else:
-        print("\tdiscard test:\tFAIL")
+        print("\tdiscard index 3:\tFAIL")
 
+    # ensure that a player can swap the position of two tiles in their hand
+        
+    bob = Player.Player("bob", list_copy) 
+    bob.swap_tiles(2, 4)    # this should swap the (id = 19) and the (id = 24)
+    if bob.hand[2].id == 24 and bob.hand[4].id == 19:
+        print("\ttile swap 2 & 4:\tGOOD")
+    else:
+        print("\ttile swap 2 & 4:\tFAIL")
 
-    # TODO: ensure that a player can swap the position of two tiles in their hand
+    bob = Player.Player("bob", list_copy) 
+    bob.swap_tiles(0, 5)    # this should swap the (id = 19) and the (id = 24)
+    if bob.hand[0].id == 30 and bob.hand[5].id == 1:
+        print("\ttile swap 0 & 5:\tGOOD")
+    else:
+        print("\ttile swap 0 & 5:\tFAIL")
 
+    bob = Player.Player("bob", list_copy) 
+    bob.swap_tiles(12, 1)    # this should swap the (id = 19) and the (id = 24)
+    if bob.hand[12].id == 17 and bob.hand[1].id == 10:
+        print("\ttile swap 12 & 1:\tGOOD")
+    else:
+        print("\ttile swap 12 & 1:\tFAIL")
 
+    # ensure that hand-sorting works (4 players, with reds)
 
-    # ensure that hand-sorting works 
-
-    dealer = Dealer.Dealer(4)
-    hand = dealer.deal_player()
-    bob = Player.Player("bob", hand) # when a player is instantiated, their hand will be sorted
+    dealer = Dealer.Dealer(4, False)
+    bob = Player.Player("bob", dealer.deal_player()) # when a player is instantiated, their hand will be sorted
 
     test_passed = True
     first_tile : Tile = bob.hand[0]
@@ -87,53 +106,111 @@ def player_tests():
             test_passed = False
 
     if test_passed:
-        print("\tsorting test:\tGOOD")
+        print("\t4P with reds sorting:\tGOOD")
     else:
-        print("\tsorting test:\tFAIL")
+        print("\t4P with reds sorting:\tFAIL")
+    
+    # ensure that hand-sorting works (4 players, no reds)
 
+    dealer = Dealer.Dealer(4, False)
+    bob = Player.Player("bob", dealer.deal_player()) # when a player is instantiated, their hand will be sorted
 
+    test_passed = True
+    first_tile : Tile = bob.hand[0]
 
+    for i in range(len(bob.hand)):
+        # the first tile in the player's hand should have the smallest id
+        if bob.hand[i].id < first_tile.id:
+            print(f"failed on {bob.hand[i].id} < {first_tile.id}")
+            test_passed = False
 
+    if test_passed:
+        print("\t4P no reds sorting:\tGOOD")
+    else:
+        print("\t4P no reds sorting:\tFAIL")
 
+    # ensure that hand-sorting works (3 players, with reds)
 
-    print("*** PLAYER TESTS: DONE ***")
+    dealer = Dealer.Dealer(4, False)
+    bob = Player.Player("bob", dealer.deal_player()) # when a player is instantiated, their hand will be sorted
+
+    test_passed = True
+    first_tile : Tile = bob.hand[0]
+
+    for i in range(len(bob.hand)):
+        # the first tile in the player's hand should have the smallest id
+        if bob.hand[i].id < first_tile.id:
+            test_passed = False
+
+    if test_passed:
+        print("\t3P with reds sorting:\tGOOD")
+    else:
+        print("\t3P with reds sorting:\tFAIL")
+
+    # ensure that hand-sorting works (3 players, no reds)
+
+    dealer = Dealer.Dealer(4, False)
+    bob = Player.Player("bob", dealer.deal_player()) # when a player is instantiated, their hand will be sorted
+
+    test_passed = True
+    first_tile : Tile = bob.hand[0]
+
+    for i in range(len(bob.hand)):
+        # the first tile in the player's hand should have the smallest id
+        if bob.hand[i].id < first_tile.id:
+            test_passed = False
+
+    if test_passed:
+        print("\t3P no reds sorting:\tGOOD")
+    else:
+        print("\t3P no reds sorting:\tFAIL")
+    
+
+    print("***\tPLAYER TESTS:\tDONE\t***")
 
 def dealer_tests():
-    print("*** DEALER TESTS: START ***")
+    print("***\tDEALER TESTS:\tSTART\t***")
+
     # ensure 136 tiles for 4 players
-    dealer = Dealer.Dealer(4, False)
 
-    print(len(dealer.tile_list))
-
+    dealer = Dealer.Dealer(4, True)
     if len(dealer.tile_list) == 136:
-        print("\tTile count:\tGOOD")
+        print("\t4 players tile count:\tGOOD")
     else:
-        print("\tTile count:\tFAIL")
+        print("\t4 players tile count:\tFAIL")
+
+    # ensure 108 tiles for 3 players
+        
+    dealer = Dealer.Dealer(3, True)
+    if len(dealer.tile_list) == 108:
+        print("\t3 players tile count:\tGOOD")
+    else:
+        print("\t3 players tile count:\tFAIL")
 
     # ensure dealer has correct number of each kind of tile
     dealer = Dealer.Dealer(4, False)
     if dealer.validate_tileset():
-        print("")
+        print("\t4 players NO reds:\tGOOD")
     else:
-        print("")
-
-    dealer = Dealer.Dealer(3, False)
-    if dealer.validate_tileset():
-        print("")
-    else:
-        print("")
+        print("\t4 players NO reds:\tFAIL")
 
     dealer = Dealer.Dealer(4, True)
     if dealer.validate_tileset():
-        print("")
+        print("\t4 players with reds:\tGOOD")
     else:
-        print("")
+        print("\t4 players with reds:\tFAIL")
+
+    dealer = Dealer.Dealer(3, False)
+    if dealer.validate_tileset():
+        print("\t3 players with reds:\tGOOD")
+    else:
+        print("\t3 players with reds:\tFAIL")
 
     dealer = Dealer.Dealer(3, True)
     if dealer.validate_tileset():
-        print("")
+        print("\t3 players NO reds:\tGOOD")
     else:
-        print("")
+        print("\t3 players NO reds:\tFAIL")
     
     # ensure dealer can give a player a hand (and tiles are correctly removed)
         
@@ -141,17 +218,17 @@ def dealer_tests():
         
     # ensure dealer can deal a tile (and tiles are correctly removed)
         
-    # dealer = Dealer.Dealer(NUM_COPIES= , RED_FIVES= )
+    # dealer = Dealer.Dealer(NUM_PLAYERS= , RED_FIVES= )
     # if():
     #     print("")
     # else:
     #     print("")
     
-    print("*** DEALER TESTS: DONE ***")
+    print("***\tDEALER TESTS:\tDONE\t***")
 
 def scorer_tests():
-    print("*** SCORER TESTS: START ***")
-    print("*** SCORER TESTS: DONE ***")
+    print("***\tSCORER TESTS:\tSTART\t***")
+    print("***\tSCORER TESTS:\tDONE\t***")
 
 
 

@@ -23,18 +23,37 @@ LOGIC:
        ???
 """
 
-NUM_COPIES = 4
-RED_FIVES = True
+print("\n4, false\n")
+dealer = Dealer.Dealer(num_players=4, red_fives=False)
 
+bob = Player.Player("bob", dealer.deal_player())
 
-dealer = Dealer.Dealer(NUM_COPIES, RED_FIVES)
+for i in range(len(bob.hand)):
+    print(bob.hand[i])
 
-print()
+print("\n4, true\n")
+dealer = Dealer.Dealer(num_players=4, red_fives=True)
 
-bob_tiles = dealer.deal_player()
+bob = Player.Player("bob", dealer.deal_player())
 
-bob = Player.Player("bob", bob_tiles)
+for i in range(len(bob.hand)):
+    print(bob.hand[i])
 
+print("\n3, false\n")
+dealer = Dealer.Dealer(num_players=3, red_fives=False)
+
+bob = Player.Player("bob", dealer.deal_player())
+
+for i in range(len(bob.hand)):
+    print(bob.hand[i])
+
+print("\n3, true\n")
+dealer = Dealer.Dealer(num_players=3, red_fives=True)
+
+bob = Player.Player("bob", dealer.deal_player())
+
+for i in range(len(bob.hand)):
+    print(bob.hand[i])
 
 
 """
