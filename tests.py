@@ -103,6 +103,7 @@ def player_tests():
     for i in range(len(bob.hand)):
         # the first tile in the player's hand should have the smallest id
         if bob.hand[i].id < first_tile.id:
+            print(f"failed on {bob.hand[i].id} < {first_tile.id}")
             test_passed = False
 
     if test_passed:
@@ -140,6 +141,7 @@ def player_tests():
     for i in range(len(bob.hand)):
         # the first tile in the player's hand should have the smallest id
         if bob.hand[i].id < first_tile.id:
+            print(f"failed on {bob.hand[i].id} < {first_tile.id}")
             test_passed = False
 
     if test_passed:
@@ -158,6 +160,7 @@ def player_tests():
     for i in range(len(bob.hand)):
         # the first tile in the player's hand should have the smallest id
         if bob.hand[i].id < first_tile.id:
+            print(f"failed on {bob.hand[i].id} < {first_tile.id}")
             test_passed = False
 
     if test_passed:

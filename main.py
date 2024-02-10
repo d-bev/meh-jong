@@ -1,7 +1,72 @@
 import Dealer
 import Player
 import Scorer
-import Tile
+# import Tile
+
+
+
+print("\n4, false\n")
+dealer = Dealer.Dealer(num_players=4, red_fives=False)
+
+hand = dealer.deal_player()
+
+print("hand size before sorting:", len(hand))
+
+print("hand before sorting:")
+
+for i in range(len(hand)):
+    print(hand[i])
+
+bob = Player.Player("bob", hand)
+
+print("\n\nhand size after sorting:", len(bob.hand))
+
+print("player's hand:\n")
+
+for i in range(len(bob.hand)):
+    print(bob.hand[i])
+
+
+
+#DEDUCTION: sorting algorithm (Player.sort_tiles()) is adding too many tiles back to the hand
+
+
+
+
+
+
+
+
+
+
+
+
+# print("\n4, true\n")
+# dealer = Dealer.Dealer(num_players=4, red_fives=True)
+
+# bob = Player.Player("bob", dealer.deal_player())
+
+# for i in range(len(bob.hand)):
+#     print(bob.hand[i])
+
+# print("\n3, false\n")
+# dealer = Dealer.Dealer(num_players=3, red_fives=False)
+
+# bob = Player.Player("bob", dealer.deal_player())
+
+# for i in range(len(bob.hand)):
+#     print(bob.hand[i])
+
+# print("\n3, true\n")
+# dealer = Dealer.Dealer(num_players=3, red_fives=True)
+
+# bob = Player.Player("bob", dealer.deal_player())
+
+# for i in range(len(bob.hand)):
+#     print(bob.hand[i])
+    
+
+
 
 """
 ASSUMPTIONS:
@@ -23,37 +88,6 @@ LOGIC:
        ???
 """
 
-print("\n4, false\n")
-dealer = Dealer.Dealer(num_players=4, red_fives=False)
-
-bob = Player.Player("bob", dealer.deal_player())
-
-for i in range(len(bob.hand)):
-    print(bob.hand[i])
-
-print("\n4, true\n")
-dealer = Dealer.Dealer(num_players=4, red_fives=True)
-
-bob = Player.Player("bob", dealer.deal_player())
-
-for i in range(len(bob.hand)):
-    print(bob.hand[i])
-
-print("\n3, false\n")
-dealer = Dealer.Dealer(num_players=3, red_fives=False)
-
-bob = Player.Player("bob", dealer.deal_player())
-
-for i in range(len(bob.hand)):
-    print(bob.hand[i])
-
-print("\n3, true\n")
-dealer = Dealer.Dealer(num_players=3, red_fives=True)
-
-bob = Player.Player("bob", dealer.deal_player())
-
-for i in range(len(bob.hand)):
-    print(bob.hand[i])
 
 
 """
