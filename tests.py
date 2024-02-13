@@ -6,6 +6,8 @@ import Scorer
 
 # Establish various test "suites"
 
+# TODO: Encapsulate these tests!
+
 
 def tile_tests():
     red_char_five = Tile.Tile(34)
@@ -14,7 +16,7 @@ def tile_tests():
     east_wind = Tile.Tile(27)
     red_dragon = Tile.Tile(32)
 
-    print("***\tTILE TESTS:\tSTART\t***")
+    print("****\tTILE TESTS:\t\tSTART\t****")
     
     if str(red_char_five) == "5 of characters (red)":
         print("\tred_char_five:\t\tGOOD")
@@ -41,10 +43,10 @@ def tile_tests():
     else:
         print("\tred_dragon:\t\tFAIL")
     
-    print("***\tTILE TESTS:\tDONE\t***")
+    print("****\tTILE TESTS:\t\tDONE\t****")
 
 def player_tests():
-    print("***\tPLAYER TESTS:\tSTART\t***")
+    print("****\tPLAYER TESTS:\t\tSTART\t****")
 
     # ensure that a player can discard (need a hand without duplicates; would break "id != id")
 
@@ -54,7 +56,15 @@ def player_tests():
                  Tile.Tile(22), Tile.Tile(28), Tile.Tile(8),
                  Tile.Tile(10)]
     
+                # 0  1  2
+                # 3  4  5
+                # 6  7  8
+                # 9  10 11
+                # 12
+    
     list_copy = tile_list
+
+    # ensure a player can discard a tile from their hand
     
     bob = Player.Player("bob", tile_list) 
     before_size = len(bob.hand)
@@ -72,22 +82,31 @@ def player_tests():
     # ensure that a player can swap the position of two tiles in their hand
         
     bob = Player.Player("bob", list_copy) 
-    bob.swap_tiles(2, 4)    # this should swap the (id = 19) and the (id = 24)
-    if bob.hand[2].id == 24 and bob.hand[4].id == 19:
+    tile_1_id = bob.hand[2].id
+    tile_2_id = bob.hand[4].id
+    bob.swap_tiles(2, 4)      # this should swap index 2 (id = 19) with index  (id = 24)
+
+    if bob.hand[2].id == tile_2_id and bob.hand[4].id == tile_1_id:
         print("\ttile swap 2 & 4:\tGOOD")
     else:
         print("\ttile swap 2 & 4:\tFAIL")
 
-    bob = Player.Player("bob", list_copy) 
-    bob.swap_tiles(0, 5)    # this should swap the (id = 19) and the (id = 24)
-    if bob.hand[0].id == 30 and bob.hand[5].id == 1:
+    bob = Player.Player("bob", list_copy)
+    tile_1_id = bob.hand[0].id
+    tile_2_id = bob.hand[5].id
+    bob.swap_tiles(0, 5)      # this should swap the (id = 19) with the (id = 24)
+
+    if bob.hand[0].id == tile_2_id and bob.hand[5].id == tile_1_id:
         print("\ttile swap 0 & 5:\tGOOD")
     else:
         print("\ttile swap 0 & 5:\tFAIL")
 
-    bob = Player.Player("bob", list_copy) 
-    bob.swap_tiles(12, 1)    # this should swap the (id = 19) and the (id = 24)
-    if bob.hand[12].id == 17 and bob.hand[1].id == 10:
+    bob = Player.Player("bob", list_copy)
+    tile_1_id = bob.hand[12].id
+    tile_2_id = bob.hand[1].id
+    bob.swap_tiles(12, 1)      # this should swap the (id = 19) with the (id = 24)
+
+    if bob.hand[12].id == tile_2_id and bob.hand[1].id == tile_1_id:
         print("\ttile swap 12 & 1:\tGOOD")
     else:
         print("\ttile swap 12 & 1:\tFAIL")
@@ -169,10 +188,10 @@ def player_tests():
         print("\t3P no reds sorting:\tFAIL")
     
 
-    print("***\tPLAYER TESTS:\tDONE\t***")
+    print("****\tPLAYER TESTS:\t\tDONE\t****")
 
 def dealer_tests():
-    print("***\tDEALER TESTS:\tSTART\t***")
+    print("****\tDEALER TESTS:\t\tSTART\t****")
 
     # ensure 136 tiles for 4 players
 
@@ -227,11 +246,11 @@ def dealer_tests():
     # else:
     #     print("")
     
-    print("***\tDEALER TESTS:\tDONE\t***")
+    print("****\tDEALER TESTS:\t\tDONE\t****")
 
 def scorer_tests():
-    print("***\tSCORER TESTS:\tSTART\t***")
-    print("***\tSCORER TESTS:\tDONE\t***")
+    print("****\tSCORER TESTS:\t\tSTART\t****")
+    print("****\tSCORER TESTS:\t\tDONE\t****")
 
 
 

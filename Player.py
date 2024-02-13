@@ -182,7 +182,9 @@ class Player():
             for i in range(len(hand_list)):
                 print(Tile.Tile(hand_list[i]))
 
-        # re-create the list
+        # re-create the player's hand
+        self.hand.clear()
+
         for i in range(len(hand_list)):
             if red_character and hand_list[i] in [5, 6, 7, 8]: # 6, 7, 8, 9 of Characters
                 self.hand.append(Tile.Tile(34))
@@ -209,7 +211,7 @@ class Player():
                 self.hand.append(Tile.Tile(hand_list[i]))
 
         if DEBUG:
-            print("\nWhat was returned:\n")
+            print("\nEnd result:\n")
             for i in range(len(hand_list)):
                 print(self.hand[i])
 

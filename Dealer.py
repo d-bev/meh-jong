@@ -111,22 +111,21 @@ class Dealer():
     # METHODS
         
     def deal_turn(self):
-        return self.__tile_list.pop()
+        return self.tile_list.pop()
 
     def deal_player(self):
         tiles : list = []
         
         for i in range(13):
-            tiles.append(self.__tile_list.pop())
+            tiles.append(self.tile_list.pop())
 
         return tiles
-    
     
     def deal_wall(self):
         tiles : list = []
         
         for i in range(10):
-            tiles.append(self.__tile_list.pop())
+            tiles.append(self.tile_list.pop())
 
         return tiles
 
@@ -135,7 +134,7 @@ class Dealer():
 
 
     def remaining(self):
-        print(f"Dealer has %d tiles" % (len(self.__tile_list)))
+        print(f"Dealer has %d tiles" % (len(self.tile_list)))
 
 
     def validate_tileset(self):
@@ -145,8 +144,8 @@ class Dealer():
         error : str = "\n"
 
         freq = {}
-        for i in range(len(self.__tile_list)):
-            item : Tile = self.__tile_list[i]
+        for i in range(len(self.tile_list)):
+            item : Tile = self.tile_list[i]
 
             if (item.id in freq):
                 freq[item.id] += 1

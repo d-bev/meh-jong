@@ -10,61 +10,29 @@ dealer = Dealer.Dealer(num_players=4, red_fives=False)
 
 hand = dealer.deal_player()
 
-print("hand size before sorting:", len(hand))
-
-print("hand before sorting:")
-
-for i in range(len(hand)):
-    print(hand[i])
-
 bob = Player.Player("bob", hand)
 
-print("\n\nhand size after sorting:", len(bob.hand))
-
-print("player's hand:\n")
+print("player's hand before:\n")
 
 for i in range(len(bob.hand)):
-    print(bob.hand[i])
+    print(i, ": ", bob.hand[i])
+
+bob.swap_tiles(0, 1)
+bob.swap_tiles(3, 8)
+bob.swap_tiles(11, 12)
+
+
+print("\nplayer's hand after:\n")
+
+for i in range(len(bob.hand)):
+    print(i, ": ", bob.hand[i])
 
 
 
-#DEDUCTION: sorting algorithm (Player.sort_tiles()) is adding too many tiles back to the hand
 
 
 
 
-
-
-
-
-
-
-
-
-# print("\n4, true\n")
-# dealer = Dealer.Dealer(num_players=4, red_fives=True)
-
-# bob = Player.Player("bob", dealer.deal_player())
-
-# for i in range(len(bob.hand)):
-#     print(bob.hand[i])
-
-# print("\n3, false\n")
-# dealer = Dealer.Dealer(num_players=3, red_fives=False)
-
-# bob = Player.Player("bob", dealer.deal_player())
-
-# for i in range(len(bob.hand)):
-#     print(bob.hand[i])
-
-# print("\n3, true\n")
-# dealer = Dealer.Dealer(num_players=3, red_fives=True)
-
-# bob = Player.Player("bob", dealer.deal_player())
-
-# for i in range(len(bob.hand)):
-#     print(bob.hand[i])
-    
 
 
 
@@ -122,29 +90,32 @@ LOGIC:
 
 
 
-Classes to be implemented:
+Planned Class/Object Heirarchy:
         Game
-        TileSet
-            Tile
-        Dead Wall
-        Player
-            Hand
+            Dealer
+                Dead Wall
+                Tile
+            Player
+                Tile
+            Scorer
+                Tile
+            
 
     Possible Class Variables:
 
         Game
             round wind
-            who's dealer
-            players' scores
+            players' seats 
             streak counter
                 
-        Dead Wall (might want to make DeadWall a TileSet object that Game object oversees)
-            Top Row
-                dora
-            Bottom Row
-                ura-dora
+        Dead Wall
+            Top Row (to determine dora)
+            Bottom Row (to determine ura-dora)
     
-                
+"""
+
+
+"""    
     @classmethod
     def call_chi():
         # take tile discarded by previous player
