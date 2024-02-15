@@ -1,0 +1,108 @@
+
+CURRENT BUGS:
+    - tests.py 
+        - test_discard_tile():  hand size is sometimes 12 instead of 13
+        - test_tile_swap():     same issue as above
+
+
+
+TODO:
+    - Player.py
+        - call_tile()
+        - force_discard()
+        - adjust discard() to pass the discarded tile to DiscardPile
+
+    - implement DiscardPile
+    - implement DeadWall
+
+    - all netcode :,)
+
+
+PLANNING AREA:
+
+    Planned Class/Object Heirarchy:
+        Game
+            Dealer
+                Dead Wall
+                    Tile
+                Tile
+            Player
+                Discard Pile
+                    Tile
+                Tile
+            Scorer
+                Tile
+                
+
+    Possible Class Variables:
+
+        Game
+            round wind
+            players' seats 
+            streak counter
+                
+        Dead Wall
+            Top Row (to determine dora)
+            Bottom Row (to determine ura-dora)
+
+
+
+PLANNING OUT FUNCTIONS
+
+    def call_chi():
+        # take tile discarded by previous player
+        # move tiles to called_tiles
+        # make the called tile perpendicular
+        # make player discard
+
+    def call_pon():
+        # take tile discarded by previous player
+        # move tiles to called_tiles
+        # make the called tile perpendicular
+        # make player discard
+
+    def call_open_kan():
+        # take tile discarded by previous player
+        # move tiles to called_tiles
+        # make the called tile perpendicular
+        # make player discard
+
+    def call_closed_kan():
+        # move tiles to called_tiles
+        # make the called tile perpendicular
+        # make player draw a tile
+        # flip next Dora Indicator in Dead Wall
+        # make player discard
+
+    def call_kita():
+        # move tile to called_tiles
+        # player draws a tile
+        # make player discard
+
+    def call_ron():
+        # design decision required! Either only allow player to call Ron when their hand is winning, or allow chombo
+
+        # Iff ron only possible when winning
+            # (assume hand has already been validated as winning)
+                # check tile discarded by previous player
+                # evaluate point value of player's hand
+        # Iff chombo is possible
+            # check if tile called makes hand winning
+                # if winning, calculate point value
+                # if not winning, apply chombo penalty
+        # end round (assume another function will check whether the game is over, or there's a new round to be started)
+
+
+    def call_tsumo():
+        # design decision required! Either only allow player to call Ron when their hand is winning, or allow chombo
+
+        # Iff tsumo only possible when winning
+            # (assume hand has already been validated as winning)
+                # check tile discarded by previous player
+                # evaluate point value of player's hand
+        # Iff chombo is possible
+            # check if tile called makes hand winning
+                # if winning, calculate point value
+                # if not winning, apply chombo penalty
+        # end round (assume another function will check whether the game is over, or there's a new round to be started)
+"""

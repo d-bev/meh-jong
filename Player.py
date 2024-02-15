@@ -65,7 +65,7 @@ class Player():
         self.__score = new_score
 
     @called_tiles.setter
-    def add_tile(self, new_tiles : list):
+    def call_tile(self, new_tiles : list):
 
         # TODO:
         #       Chi / Pon   : two tiles from player's hand and 1 other player's discarded tile
@@ -93,7 +93,7 @@ class Player():
         self.hand[index_2] = temp
 
 
-    # TODO: method to allow a player to select a specific tile to discard at the end of the turn
+    # method to allow a player to discard a specific tile
     def discard(self, tile_to_discard: int):
         # get metadata of selected Tile
         discard_copy = self.hand[tile_to_discard]
@@ -105,20 +105,12 @@ class Player():
                 hand.append(self.hand[i])
         self.hand = hand
 
-        # return Tile to caller so that Tile can be 'moved' to DiscardPile
-        return discard_copy
+        # TODO: pass tile to discard_pile
 
 
     # TODO: method to (if a player runs out of time on their turn) force them to discard their newly-drawn tile
     def force_discard(self):
-        # store drawn tile
-        draw = self.__drawn_tile
-
-        #clear drawn tile
-        self.__drawn_tile = None
-
-        # return Tile to caller so that Tile can be 'moved' to DiscardPile
-        return draw
+        pass
 
 
     #   Create an equivalent tile set, but sorted first by suit, and then by value

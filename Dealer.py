@@ -109,10 +109,13 @@ class Dealer():
 
     
     # METHODS
+
         
+    # returns a single tile
     def deal_turn(self):
         return self.tile_list.pop()
 
+    # returns 13 tiles
     def deal_player(self):
         tiles : list = []
         
@@ -121,6 +124,7 @@ class Dealer():
 
         return tiles
     
+    # returns 10 tiles
     def deal_wall(self):
         tiles : list = []
         
@@ -133,10 +137,11 @@ class Dealer():
     # TESTING
 
 
+    # returns how many tiles the dealer has left
     def remaining(self):
-        print(f"Dealer has %d tiles" % (len(self.tile_list)))
+        return len(self.tile_list)
 
-
+    # emsures the tileset has the expected frequency of each tile (dictated by game rules)
     def validate_tileset(self):
         is_valid = True
         red_fives = self.red_fives 
@@ -156,8 +161,6 @@ class Dealer():
             print(f"\ncount: 4, red: {red_fives}\n")
             for key, value in freq.items():
                 print(Tile.Tile(key))
-
-        
 
         if red_fives and num_players == 4:
             for key, value in freq.items():
