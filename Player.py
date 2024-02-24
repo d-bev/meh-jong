@@ -116,9 +116,6 @@ class Player():
     #   Create an equivalent tile set, but sorted first by suit, and then by value
     def sort_tiles(self):
         hand_list = []
-        red_character = False
-        red_circle = False
-        red_bamboo = False
 
         # take the 'id' param from each Tile and sort that list instead of attempting to sort the objects
         for i in range(len(self.hand)):
@@ -137,74 +134,16 @@ class Player():
             for i in range(len(hand_list)):
                 print(Tile.Tile(hand_list[i]))
 
-        """
-            Now, because red fives have the highest integer value, we need to parse the list we've 
-                created and determine where the red fives should be placed (as if they were normal fives)
-
-            I'm going to parse the 'hand' list I just created, remove the Red 5, and set a flag if 
-                there's a red five (of each kind)
-
-            When re-constructing the Hand, I'm going to scan the value of hand_list and insert each
-                red five before any tile greater than or equal to a 6 of its suit
-
-                i.e., I know there's a Red 5 of Circles (Tile.id == 35), so I'll scan the list for a
-                    6 of Circles or higher. If I find such a tile, I'll insert the Red 5 of Circles into
-                    the list, and then insert whatever tile I originally scanned afterwards
-        """
-        
-        # detecting prescense of red fives
-        for i in range(len(hand_list)):
-            if hand_list[i] == 34:
-                red_character = True
-            if hand_list[i] == 35:
-                red_circle = True
-            if hand_list[i] == 36:
-                red_bamboo = True
-
-        # removing red fives from list
-        if red_character:
-            hand_list.remove(34)
-        if red_circle:
-            hand_list.remove(35)
-        if red_bamboo:
-            hand_list.remove(36)
-
-        if DEBUG:
-            print("\nAfter removal:\n")
-            for i in range(len(hand_list)):
-                print(Tile.Tile(hand_list[i]))
-
-        # re-create the player's hand
+        # clear the player's hand
         self.hand.clear()
 
+        # re-create the player's hand (using the list of integers as a reference)
         for i in range(len(hand_list)):
-            if red_character and hand_list[i] in [5, 6, 7, 8]: # 6, 7, 8, 9 of Characters
-                self.hand.append(Tile.Tile(34))
-                self.hand.append(Tile.Tile(hand_list[i]))
-                # lower the flag so we don't add multiple red fives
-                red_character = False
-                # increment the loop counter because we added 2 tiles
-                i += 1
-            elif red_circle and hand_list[i] in [14, 15, 16, 17]: # 6, 7, 8, 9 of Circles
-                self.hand.append(Tile.Tile(35))
-                self.hand.append(Tile.Tile(hand_list[i]))
-                # lower the flag so we don't add multiple red fives
-                red_circle = False
-                # increment the loop counter because we added 2 tiles
-                i += 1
-            elif red_bamboo and hand_list[i] in [23, 24, 25, 26]: # 6, 7, 8, 9 of Bamboo
-                self.hand.append(Tile.Tile(36))
-                self.hand.append(Tile.Tile(hand_list[i]))
-                # lower the flag so we don't add multiple red fives
-                red_bamboo = False
-                # increment the loop counter because we added 2 tiles
-                i += 1
-            else:
-                self.hand.append(Tile.Tile(hand_list[i]))
+            self.hand.append(Tile.Tile(hand_list[i]))
 
         if DEBUG:
             print("\nEnd result:\n")
-            for i in range(len(hand_list)):
+            for i in range(len(self.hand)):
                 print(self.hand[i])
 
         return self.hand

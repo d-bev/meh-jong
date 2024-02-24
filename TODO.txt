@@ -1,21 +1,26 @@
 
 CURRENT BUGS:
-    - tests.py 
-        - test_discard_tile():  hand size is sometimes 12 instead of 13
-        - test_tile_swap():     same issue as above
-
 
 
 TODO:
+    - tests.py
+        - there's always room for more tests!
+        - add error reporting to each test
+        - make test_hand_sorting() actual check that the hand is sorted 
+            (currently just tests that the first tile in a hand is the smallest in the hand)
+
     - Player.py
         - call_tile()
         - force_discard()
         - adjust discard() to pass the discarded tile to DiscardPile
 
+    - Dealer.py
+        - implement 3-player tileset checks
+
     - implement DiscardPile
     - implement DeadWall
 
-    - all netcode :,)
+    - netcode D:
 
 
 PLANNING AREA:
@@ -23,13 +28,13 @@ PLANNING AREA:
     Planned Class/Object Heirarchy:
         Game
             Dealer
-                Dead Wall
+                Dead Wall (maybe not an object; probably should be though)
                     Tile
-                Tile
+                Tile (redundant?)
             Player
-                Discard Pile
+                Discard Pile (maybe not an object; who cares)
                     Tile
-                Tile
+                Tile (redundant?)
             Scorer
                 Tile
                 
@@ -38,7 +43,7 @@ PLANNING AREA:
 
         Game
             round wind
-            players' seats 
+            players' seats (and scores?)
             streak counter
                 
         Dead Wall

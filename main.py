@@ -1,42 +1,15 @@
 import Dealer
 import Player
 import Scorer
-# import Tile
-
-
-
-dealer = Dealer.Dealer(num_players=4, red_fives=False)
-
-
-bob = Player.Player("bob", dealer.deal_player())
-
-
-while dealer.remaining() > 13:
-    bob.hand = dealer.deal_player()
-    if len(bob.hand) != 13:
-        print (f"{len(bob.hand)}?! WHAT THE FUCK")
+import Tile
+    
 
 
 
 
-"""
-ASSUMPTIONS:
-
-    4-player game
-    Red Fives are optional
-    standard tileset (riichi)
-    no time limits
-
-"""
+hand =  [Tile.Tile(5), Tile.Tile(0), Tile.Tile(1), Tile.Tile(2),
+        Tile.Tile(17), Tile.Tile(13), Tile.Tile(15), Tile.Tile(6),
+        Tile.Tile(22), Tile.Tile(33), Tile.Tile(28), Tile.Tile(10),
+        Tile.Tile(25)]
 
 
-
-"""
-ASSUMPTIONS:
-
-    3-player game
-    Red Fives are optional
-    unique tileset (no non-terminal bamboo)
-    no time limits
-
-"""

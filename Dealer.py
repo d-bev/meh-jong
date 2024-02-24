@@ -14,74 +14,56 @@ class Dealer():
         self.__num_players = num_players
         
         if red_fives and num_players == 4:
+            # add 4 copies of each tile that isn't a 5
             for i in range(4):
-                # skip the indeces of all '5' tiles
-                for i in range(4):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(5, 13):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(14, 22):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(23, 34):
-                    self.__tile_list.append(Tile.Tile(i))
+                for i in range(37):
+                    # exclude all 5's
+                    if i not in [4, 5, 14, 15, 24, 25]:
+                        self.__tile_list.append(Tile.Tile(i))
 
-            # add the non-red fives
+            # add 3 copies of each normal 5
             for i in range(3):
                 self.__tile_list.append(Tile.Tile(4))
-                self.__tile_list.append(Tile.Tile(13))
-                self.__tile_list.append(Tile.Tile(22))
+                self.__tile_list.append(Tile.Tile(14))
+                self.__tile_list.append(Tile.Tile(24))
 
-            # add a red 5 of each suit
-            self.__tile_list.append(Tile.Tile(34))
-            self.__tile_list.append(Tile.Tile(35))
-            self.__tile_list.append(Tile.Tile(36))
+            # add a red 5 to each suit
+            self.__tile_list.append(Tile.Tile(5))
+            self.__tile_list.append(Tile.Tile(15))
+            self.__tile_list.append(Tile.Tile(25))
 
-        elif (not red_fives) and (num_players == 4):
+        elif (not red_fives) and num_players == 4:
+            # add 4 copies of each tile, but skip red 5's
             for i in range(4):
-                for i in range(34):
-                    self.__tile_list.append(Tile.Tile(i))
+                for i in range(37):
+                    # exclude red 5's
+                    if i not in [5, 15, 25]:
+                        self.__tile_list.append(Tile.Tile(i))
 
         elif red_fives and num_players == 3:
+            # 4 copies of each tile (except 5's), and no non-terminal bamboo
             for i in range(4):
-                # only add outside character tiles
-                self.__tile_list.append(Tile.Tile(0))
-                self.__tile_list.append(Tile.Tile(8))
+                for i in range(37):
+                    # exclude all 5's and all non-terminal bamboo
+                    if i not in [4, 5, 14, 15, 21, 22, 23, 24, 25, 26, 27, 28]:
+                        self.__tile_list.append(Tile.Tile(i))
 
-                # skip the indeces of all '5' tiles
-                for i in range(9, 13):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(14, 22):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(23, 34):
-                    self.__tile_list.append(Tile.Tile(i))
-
-            # add the non-red fives
+            # add the non-red 5's
             for i in range(3):
-                self.__tile_list.append(Tile.Tile(13))
-                self.__tile_list.append(Tile.Tile(22))
+                self.__tile_list.append(Tile.Tile(4))
+                self.__tile_list.append(Tile.Tile(14))
 
-            # add a red 5 of each suit
-            self.__tile_list.append(Tile.Tile(35))
-            self.__tile_list.append(Tile.Tile(36))
+            # add the red 5's
+            self.__tile_list.append(Tile.Tile(5))
+            self.__tile_list.append(Tile.Tile(15))
 
-        elif (not red_fives) and (num_players == 3):
+        elif (not red_fives) and num_players == 3:
+            # add 4 copies of each tile, but no red 5's nor non-terminal bamboo
             for i in range(4):
-                # only add outside character tiles
-                self.__tile_list.append(Tile.Tile(0))
-                self.__tile_list.append(Tile.Tile(8))
-
-                # skip the indeces of all '5' tiles
-                for i in range(9, 13):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(14, 22):
-                    self.__tile_list.append(Tile.Tile(i))
-                for i in range(23, 34):
-                    self.__tile_list.append(Tile.Tile(i))
-
-            # add the non-red fives
-            for i in range(4):
-                self.__tile_list.append(Tile.Tile(13))
-                self.__tile_list.append(Tile.Tile(22))
+                for i in range(37):
+                    # exclude red 5's and all non-terminal bamboo
+                    if i not in [5, 15, 21, 22, 23, 24, 25, 26, 27, 28]:
+                        self.__tile_list.append(Tile.Tile(i))
         else:
             print("\nEOC REACHED IN DEALER INIT\n")
 
@@ -141,7 +123,7 @@ class Dealer():
     def remaining(self):
         return len(self.tile_list)
 
-    # emsures the tileset has the expected frequency of each tile (dictated by game rules)
+    # ensures the tileset has the expected frequency of each tile (dictated by game rules)
     def validate_tileset(self):
         is_valid = True
         red_fives = self.red_fives 
@@ -164,16 +146,16 @@ class Dealer():
 
         if red_fives and num_players == 4:
             for key, value in freq.items():
-                if key in [4, 13, 22]: # if tile is a non-red five, should only be 3
+                if key in [4, 14, 24]: # if tile is a non-red five, should only ever be 3
                     if value != 3:
                         is_valid = False
                         error += f"counted (%d) copies of Tile #%d, but expected 3\n" % (value, key)
-                elif key in [34, 35, 36]: # if tile is a red five, should only be 1
+                elif key in [5, 15, 25]: # if tile is a red five, should only ever be 1
                     if value != 1:
                         is_valid = False
                         error += f"counted (%d) copies of Tile #%d, but expected 1\n" % (value, key)
                 else:
-                    if value != 4: # if tile isn't a five, should only be 4
+                    if value != 4: # if tile isn't a five, should only ever be 4
                         is_valid = False
                         error += f"counted (%d) copies of Tile #%d, but expected 4\n" % (value, key)
         elif (not red_fives) and num_players == 4:
@@ -182,11 +164,13 @@ class Dealer():
                     is_valid = False
                     error += f"counted (%d) copies of Tile #%d, but expected 4\n" % (value, key)
         elif red_fives and num_players == 3:
+            # TODO: implement 3-player tileset checks
             pass
         elif (not red_fives) and num_players == 3:
-            if [1, 2, 3, 4, 5, 6, 7] in freq.items():
-                error += "tileset contains non-terminal characters!\n"
+            if [21, 22, 23, 24, 25, 26, 27, 28] in freq.items():
+                error += "tileset contains non-terminal bamboo!\n"
             else:
+                # TODO: implement 3-player tileset checks
                 pass
         else:
             print("EOC REACHED IN VALIDATE_TILESET")
